@@ -50,7 +50,7 @@
       {
         "group": "Bookings",
        "pages": [
-               "api-reference/endpoint/create-a-new-booking"    
+               "api-reference/endpoint/get-all-bookings"    
        ]
       }
       ],
@@ -60,5 +60,5 @@
       "feedback": {
         "thumbsRating": true
       },
-      "openapi": ["/openapi.json"]
+      "openapi": ["/openapi.yml"]
 }

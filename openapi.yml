@@ -1,0 +1,108 @@
+openapi: 3.0.3
+info:
+  title: NITJ Guest House Website API
+  description: |-
+    NITJ Guest House Online Room Booking System is created to streamline room allottment flow.
+  contact:
+    email: dhimanmridul91@gmail.com
+  version: 1.0.0
+servers:
+  - url: https://guest-house-backend-onrender.com
+    description: Staging URL
+paths:
+  /booking:
+    get:
+      tags:
+      - bookings
+      summary: retrieve all booking
+      description: View all bookings in the database.
+      operationId: createBooking
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Booking'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Booking'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Booking'          
+              application/xml:
+                schema:
+                  $ref: '#/components/schemas/Booking'
+
+components:
+  schemas:
+    Booking:
+      type: object
+      properties: 
+        kind: 
+          type: string
+        purpose:
+          type: string
+        name: 
+          type: string
+        designation: 
+          type: string
+        address:
+          type: string
+        phone:
+          type: string
+        email: 
+          type: string
+        startDate:
+          type: string
+        endDate: 
+          type: string
+        startTime:
+          type: string
+        endTime: 
+          type: string
+        status:
+          type: string
+        paymentStatus:
+          type: string
+        clientTxnId:
+          type: string
+        bookingFor:
+          type: string
+        guestHouseSelected:
+          type: number
+        roomsSelected: 
+          type: number
+        guestHouseAllotted:
+          type: number
+        roomsAllotted:
+          type: array
+          items:
+            type: number
+        roomBooker: 
+          type: object
+          properties: 
+            isAdmin: 
+              type: boolean
+            isStudent:
+              type: boolean
+            idProof:
+              type: string
+            name: 
+              type: string
+            designation:
+              type: string
+            dept:
+              type: string
+            phone:
+              type: string
+            email:
+              type: string
+            address:
+              type: string
