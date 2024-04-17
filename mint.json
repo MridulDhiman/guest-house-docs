@@ -1,0 +1,64 @@
+{
+    "$schema": "https://mintlify.com/schema.json",
+    "name": "NITJ GuestHouse Docs", "logo": {
+      "dark": "/favicon.png",
+      "light": "/favicon.png",
+      "href": "https://guest-house-frontend.onrender.com/"
+    },
+    "colors": {
+        "primary": "#9563FF",
+        "light": "#AE87FF",
+        "dark": "#0D001D",
+        "background": {
+          "dark": "#090014"
+        },
+        "anchors": {
+          "from": "#FF7F57",
+          "to": "#9563FF"
+        }
+      },
+      "favicon": "favicon.png",
+      "topbarLinks": [
+        {
+          "name": "Support",
+          "url": "mailto:avirals.cs.22@nitj.ac.in"
+        }
+      ],
+      "topbarCtaButton": {
+        "name": "Dashboard",
+        "url": "https://guest-house-frontend.onrender.com/login"
+      },
+      "tabs": [
+        {
+          "name": "API Reference",
+          "url": "api-reference"
+        }
+      ],
+      "navigation": [
+        {
+            "group": "Getting Started",
+            "pages": ["introduction"]
+       },
+
+       {
+        "group": "API Reference",
+        "pages": [
+          "api-reference/introduction",
+          "api-reference/errors"
+        ]
+      },
+      {
+        "group": "Bookings",
+       "pages": [
+               "api-reference/endpoint/create-a-new-booking"    
+       ]
+      }
+      ],
+      "api": {
+        "maintainOrder": true
+      },
+      "feedback": {
+        "thumbsRating": true
+      },
+      "openapi": ["/openapi.json"]
+}

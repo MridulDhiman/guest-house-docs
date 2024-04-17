@@ -1,0 +1,8 @@
+{
+  "name": "mdx",
+  "version": "1.0.0",
+  "description": "mdx docs",
+  "scripts": {
+    "dev": "mintlify dev --port 3333"
+  }
+}

@@ -1,0 +1,61 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "NITJ Guest House Website API",
+        "description": "NITJ Guest House Online Room Booking System is created to streamline room allottment flow.",
+        "version": "0.0.1",
+        "contact": {
+          "name": "NITJ Guest House Support",
+          "email": "avirals.cs.22@nitj.ac.in"
+        }
+      },
+        "servers" : [ 
+           {
+            "url" : "https://guest-house-backend.onrender.com",
+            "description" : "Staging URL"
+           }
+          ],
+      "paths" : {
+          "/booking" : {
+            "post" : {
+              "operationId": "createBooking",
+              "x-speakeasy-name-override": "create",
+              "x-speakeasy-usage-example": true,
+              "summary": "Create a new booking",
+              "description": "Create a new booking for the authenticated user.",
+              "tags": [
+                "Bookings"
+                ],
+                "requestBody": {
+                  "content": {
+                    "application/json" : {
+                      "schema": {
+                        "type" : "object",
+                        "properties" : {
+                          "purpose" : {
+                            "type" : "string",
+                            "description" : "Purpose of booking room."
+                          }, 
+                          "firstName" : {
+                            "type" : "string",
+                            "description" : "First name of user."
+                          },
+                          "lastName" : {
+                            "type" : "string",
+                            "description" : "Last name of user"
+                          },
+                          "designation" : {
+                            "type" : "string",
+                            "description" : "User's Designation."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+
+
+            }
+          }
+      }
+}
