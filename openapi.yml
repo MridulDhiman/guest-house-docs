@@ -1,13 +1,13 @@
+---
 openapi: 3.0.3
 info:
   title: NITJ Guest House Website API
-  description: |-
-    NITJ Guest House Online Room Booking System is created to streamline room allottment flow.
+  description: NITJ Guest House Online Room Booking System is created to streamline room allottment flow.
   contact:
     email: dhimanmridul91@gmail.com
   version: 1.0.0
 servers:
-  - url: https://guest-house-backend-onrender.com
+  - url: https://guest-house-backend.onrender.com
     description: Staging URL
 paths:
   /booking:
@@ -16,29 +16,16 @@ paths:
       - bookings
       summary: retrieve all booking
       description: View all bookings in the database.
-      operationId: createBooking
-      requestBody: 
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Booking'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Booking'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Booking'
-        required: true
+      operationId: getBookings
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
+                type: array
+                items:
                   $ref: '#/components/schemas/Booking'          
-              application/xml:
-                schema:
-                  $ref: '#/components/schemas/Booking'
 
 components:
   schemas:
