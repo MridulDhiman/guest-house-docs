@@ -50,7 +50,10 @@
       {
         "group": "Bookings",
        "pages": [
-               "api-reference/endpoint/get-all-bookings"    
+               "api-reference/endpoint/get-all-bookings",
+               "api-reference/endpoint/get-booking-by-approval-type",
+               "api-reference/endpoint/delete-booking-by-id",
+               "api-reference/endpoint/get-booking-by-id"
        ]
       }
       ],

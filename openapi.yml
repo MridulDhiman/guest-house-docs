@@ -14,7 +14,7 @@ paths:
     get:
       tags:
       - bookings
-      summary: retrieve all booking
+      summary: get all booking
       description: View all bookings in the database.
       operationId: getBookings
       responses:
@@ -25,12 +25,85 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Booking'          
+                  $ref: '#/components/schemas/Booking'  
+  /booking/approved/{approvalType}:
+    get: 
+      tags: 
+        - bookings 
+        - status  
+      summary: get bookings by approval type
+      description: Retrieve all bookings by booking status.
+      operationId: getBookingByStatus
+      parameters:
+      - name: approvalType
+        in: path
+        description: booking status 
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Booking'   
+  /booking/{bookingId}:
+    get:
+      tags:
+      - booking
+      summary: get booking by id 
+      description: Retrieve single booking by booking ID from the database
+      operationId: getBookingById
+      parameters:
+      - name: bookingId
+        in: path
+        description: booking ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Booking'
+    delete: 
+      tags:
+      - booking
+      summary: delete booking by booking ID
+      description: Cancellation of booking from guesthouse.
+      operationId: deleteBookingByID
+      parameters:
+      - name: bookingId
+        in: path
+        description: booking ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/GenericResponse'
+
 
 components:
   schemas:
     Booking:
       type: object
+      required:
+      - purpose
+      - designation
+      - address
+      - phone 
+      - email
+      - status
       properties: 
         kind: 
           type: string
@@ -47,9 +120,9 @@ components:
         email: 
           type: string
         startDate:
-          type: string
+          type: string      
         endDate: 
-          type: string
+          type: string   
         startTime:
           type: string
         endTime: 
@@ -74,6 +147,8 @@ components:
             type: number
         roomBooker: 
           type: object
+          required:
+          - email
           properties: 
             isAdmin: 
               type: boolean
@@ -93,3 +168,11 @@ components:
               type: string
             address:
               type: string
+    GenericResponse: 
+      type: object
+      required: 
+      - message 
+      properties:
+        message: 
+          type: string
+        
