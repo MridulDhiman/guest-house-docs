@@ -1,6 +1,6 @@
 {
-    "$schema": "https://mintlify.com/schema.json",
-    "name": "NITJ GuestHouse Docs", "logo": {
+    "name": "NITJ GuestHouse Docs",
+     "logo": {
       "dark": "/favicon.png",
       "light": "/favicon.png",
       "href": "https://guest-house-frontend.onrender.com/"
@@ -49,12 +49,24 @@
       },
       {
         "group": "Bookings",
-       "pages": [
+        "pages": [
+               "api-reference/endpoint/create-new-booking",
                "api-reference/endpoint/get-all-bookings",
-               "api-reference/endpoint/get-booking-by-approval-type",
                "api-reference/endpoint/delete-booking-by-id",
-               "api-reference/endpoint/get-booking-by-id"
+               "api-reference/endpoint/get-booking-by-id",
+               "api-reference/endpoint/get-booking-by-approval-type"
        ]
+      },
+      {
+        "group": "Users",
+        "pages": [
+          "api-reference/endpoint/get-all-users",
+          "api-reference/endpoint/delete-all-users",
+          "api-reference/endpoint/get-user-by-id", 
+         "api-reference/endpoint/delete-user-by-id",
+          "api-reference/endpoint/get-users-by-user-type",
+          "api-reference/endpoint/delete-users-by-user-type"
+        ]
       }
       ],
       "api": {

@@ -91,8 +91,256 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schemas/GenericResponse'
-
-
+  /booking/register:
+    post:
+      tags:
+      - booking
+      summary: Create New Booking
+      description: Creation of new booking by user/admin.
+      operationId: createNewBooking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNewBookingRequest'
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+        '500':
+          description: Server Exception Occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /users:
+    get: 
+      tags:
+      - users
+      summary: Get All Users
+      description: Retrieve all the users from the database.
+      operationId: getUsers
+      responses: 
+        '200': 
+          description: Successful Operation
+          content: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User' 
+        '500':
+          description: Server Exception Occurred
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+    delete: 
+      tags:
+      - users
+      summary: Delete All Users
+      description: Remove all the users from the database.
+      operationId: deleteUsers
+      responses: 
+        '200': 
+          description: Successful Operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+        '500':
+          description: Server Exception Occurred
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'    
+  /users/{userId}:
+    get:
+      tags:
+      - user
+      summary: Get User By Id
+      description: Retrieve user by user id from the database.
+      operationId: getUserById
+      parameters:
+      - name: userId
+        in: path
+        description: user id
+        required: true
+        schema:
+          type: string
+      responses: 
+        '200': 
+          description: Successful Operation
+          content: 
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/User' 
+        '500':
+          description: Server Exception Occurred
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+    delete: 
+      summary: Delete User by ID
+      description: Remove User by unique user id from the database
+      operationId: deleteUserById
+      parameters: 
+      - name: userId
+        in: path
+        required: true
+        description: user id 
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+        '500':
+          description: Server Exception Occurred
+          content: 
+            application/json: 
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /users/approved/{userType}: 
+    get:
+      summary: Get Users by user type
+      description: Retrieve Users by User Type from the database
+      operationId: getUserByUserType
+      parameters:
+      - name: userType
+        in: path
+        description: User Type
+        required: true
+        schema: 
+          type: string
+          enum: 
+          - pending
+          - registered
+          - rejected
+      responses: 
+        '200': 
+          description: Successful Operation
+          content: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserTypeSchema'
+        '500':
+          description: Server Exception Occurred
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+    delete: 
+      summary: Delete Users by User Type
+      description: delete specific type's users from the database
+      operationId: deleteUserByUserType
+      parameters:
+      - name: userType
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - pending
+          - registered
+          - rejected
+      responses:
+        '200':
+          description: Successful Operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+        '500':
+          description: Server Exception Occurred
+          content: 
+            application/json: 
+              schema:
+                $ref: '#/components/schemas/GenericResponse'    
+  /users/approved/{userType}/{id}:
+    delete:
+      summary: Delete Single User by User Type
+      description: Delete unique user of specific type, from the database
+      operationId: deleteSingleUserByUserType
+      parameters:
+      - name: userType
+        in: path
+        description: user type
+        required: true
+        schema: 
+          type: string
+          enum:
+          - pending
+          - rejected
+          - registered
+      - name: id
+        in: path
+        description: user id 
+        required: true
+        schema: 
+          type: string
+        responses:
+          '200':
+          description: Successful Operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          '500':
+            description: Server Exception Occurred
+            content: 
+              application/json: 
+                schema:
+                  $ref: '#/components/schemas/GenericResponse' 
+  /users/approved/pending/length:
+    get:
+      summary: get pending user's length
+      description: Get pending user's length from the database
+      operationId: GetPendingUserLength
+      responses:
+        '200':
+            description: Successful Operation
+            content: 
+              application/json:
+                schema:
+                  type: integer
+          '500':
+            description: Server Exception Occurred
+            content: 
+              application/json: 
+                schema:
+                  $ref: '#/components/schemas/GenericResponse'    
+  /register: 
+    post:
+      summary: Create New User
+      description: create new user, that would be either student, faculty or others.
+      operationId: createNewUser
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NewUserRequestBody'
+      responses:
+        '200':
+          description: Successful Operation
+          content: 
+            application/json:
+              schema:
+        '500':
+          description: Server Exception Occurred
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
 components:
   schemas:
     Booking:
@@ -175,4 +423,149 @@ components:
       properties:
         message: 
           type: string
+    CreateNewBookingRequest:
+      type: object
+      properties: 
+        purpose:
+          type: string
+        firstName: 
+          type: string
+        lastName: 
+          type: string
+        designation:
+          type: string
+        address:
+          type: string
+        phNumber:
+          type: string
+        email: 
+          type: string
+        guestHouseSelected: 
+          type: string
+        roomsSelected:
+          type: string
+        companions:
+          type: array
+          items:
+            type: string
+        arrivalDate:
+          type: string
+        departureDate:
+          type: string
+        isStudent:
+          type: boolean
+        isAdmin:
+          type: boolean
+        PersonName:
+          type: string
+        PersonDept:
+          type: string
+        PersonID:
+          type: string
+        PersonPhone:
+          type: string
+        PersonEmail:
+          type: string
+        PersonAddress:
+          type: string
+        AdminEmail:
+          type: string
+    User:
+      type: object
+      required: 
+      - name
+      - email
+      - password
+      - verificationToken
+      - emailVerified
+      properties:
+        name: 
+          type: string
+        phone:
+          type: string
+        email: 
+          type: string
+        city: 
+          type: string
+        address: 
+          type: string
+        govtID: 
+          type: string
+        userLogo: 
+          type: string
+        idProof:
+          type: string
+        refInfo:
+          type: string
+        reference: 
+          type: string
+        password: 
+          type: string
+        verificationToken: 
+          type: string
+        emailVerified:
+          type: boolean
+        registerOption:
+          type: number
+        nitUserDept:
+          type: string
+        isNitUser:
+          type: boolean
+        studRoll:
+          type: number
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+    UserTypeSchema:
+      type: object
+      required:
+      - user
+      properties:  
+        user:
+          $ref: '#/components/schemas/User' 
+        bookingHistory:
+          description:  booking history for registered users only
+          type: array
+          items:
+            $ref: '#/components/schemas/Booking'
+    NewUserRequestBody: 
+      type: object
+      required: 
+      properties:
+        Firstname:
+          type: string
+        Lastname:
+          type: string
+        Phnnumber: 
+          type: string
+        Email:
+          type: string
+        registerOption:
+          type: number
+        Password: 
+          type: string
+        idProof:
+          type: string
+          format: binary
+        selectedOption:
+          type: number
+        Addres:
+          type: string
+        StudentRollNumber:
+          type: string
+        RefFirstName:
+          type: string
+        RefLastName:
+          type: string
+        AlumniBatch: 
+          type: string
+        ALumniJobProfile:
+          type: string
+        RefPhoneNumber: 
+          type: string
+        FacultyEmail: 
+          type: string  
+        
+
         
